@@ -1,0 +1,44 @@
+
+### Exp 1: Cache size vs miss rate (32B blocks, 2-way, LRU)
+      Size (B) |    Miss rate %
+----------------------------------
+           512 |          84.58
+          1024 |          75.07
+          2048 |          57.67
+          4096 |          37.80
+          8192 |          31.59
+         16384 |          14.53
+
+### Exp 2: Associativity vs miss rate (4KB, 32B blocks, LRU)
+          Ways |    Miss rate %
+----------------------------------
+             1 |          35.73
+             2 |          37.80
+             4 |          24.56
+             8 |          16.85
+            16 |          12.78
+
+### Exp 3: Block size vs miss rate (4KB, 2-way, LRU)
+     Block (B) |    Miss rate %
+----------------------------------
+             8 |          44.87
+            16 |          40.07
+            32 |          37.80
+            64 |          37.11
+           128 |          37.56
+           256 |          38.90
+
+### Exp 4: Replacement policy (4KB, 32B, 4-way)
+        Policy |    Miss rate % |  AMAT (cycles)
+---------------------------------------------------
+           LRU |          24.56 |          25.56
+          FIFO |          28.24 |          29.24
+        RANDOM |          25.87 |          26.87
+
+### Exp 5: 64x64 matrix traversal (4KB, 64B, 4-way)
+         Order |    Miss rate % |  AMAT (cycles)
+---------------------------------------------------
+     Row-major |           6.25 |           7.25
+  Column-major |         100.00 |         101.00
+
+Saved plots in results/: exp1_size.png, exp2_assoc.png, exp3_block.png, exp4_policy.png

@@ -1,0 +1,44 @@
+
+### Exp 1: Cache size (64B blocks, 4-way, LRU)
+  Size (B) |  matmul (naive) |  matmul (tiled) |       quicksort |     linked list
+-------------------------------------------------------------------------------------
+      1024 |           7.39% |           5.72% |           1.74% |          15.61%
+      2048 |           7.24% |           0.79% |           1.16% |           3.45%
+      4096 |           6.98% |           0.42% |           0.70% |           2.65%
+      8192 |           1.46% |           0.32% |           0.51% |           2.38%
+     16384 |           0.71% |           0.26% |           0.36% |           2.24%
+     32768 |           0.19% |           0.17% |           0.22% |           2.16%
+     65536 |           0.14% |           0.12% |           0.14% |           2.06%
+
+### Exp 2: Associativity (4KB, 64B blocks, LRU)
+      Ways |  matmul (naive) |  matmul (tiled) |       quicksort |     linked list
+-------------------------------------------------------------------------------------
+         1 |           8.53% |           3.92% |           3.24% |           5.46%
+         2 |           7.62% |           1.09% |           0.97% |           4.60%
+         4 |           6.98% |           0.42% |           0.70% |           2.65%
+         8 |           6.94% |           0.39% |           0.66% |           2.48%
+        16 |           6.93% |           0.38% |           0.64% |           2.45%
+
+### Exp 3: Block size (8KB, 4-way, LRU)
+ Block (B) |  matmul (naive) |  matmul (tiled) |       quicksort |     linked list
+-------------------------------------------------------------------------------------
+        16 |           4.03% |           0.98% |           1.49% |           5.29%
+        32 |           2.32% |           0.54% |           0.86% |           4.42%
+        64 |           1.46% |           0.32% |           0.51% |           2.38%
+       128 |           1.07% |           0.27% |           0.34% |           1.50%
+       256 |           6.71% |           0.34% |           0.28% |           1.22%
+
+### Exp 4: Replacement policy (2KB, 64B blocks, 4-way)
+    Policy |  matmul (naive) |  matmul (tiled) |       quicksort |     linked list
+-------------------------------------------------------------------------------------
+       LRU |           7.24% |           0.79% |           1.16% |           3.45%
+      FIFO |           7.98% |           0.93% |           1.24% |           4.15%
+    RANDOM |           8.02% |           1.03% |           1.32% |           4.38%
+
+### AMAT summary (4KB, 64B, 4-way, LRU)
+  matmul (naive): miss rate   6.98%   AMAT   7.98 cycles
+  matmul (tiled): miss rate   0.42%   AMAT   1.42 cycles
+       quicksort: miss rate   0.70%   AMAT   1.70 cycles
+     linked list: miss rate   2.65%   AMAT   3.65 cycles
+
+Saved plots in results/: real_exp1_size.png, real_exp2_assoc.png, real_exp3_block.png
